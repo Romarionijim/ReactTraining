@@ -256,9 +256,25 @@ const Returns = () => {
 }
 
 const ShortCircuit = () => {
+  const [text, setText] = useState('')
+  const [isError, setIsError] = useState(false)
+  const firstValue = text || 'hello value'
+  const secondValue = text && 'second value'
+
   return (
-    <div>
-      Hello
-    </div>
+    <>
+      {/* <h1>{firstValue}</h1>
+      <h1>Second Value: {secondValue}</h1> */}
+      {/* {(1 + 1 === 2 && 1 - 1 === 0) ? 'true' : 'false'}
+      */}
+
+      <h1>{text || 'John Doe'}</h1>
+      <button className='btn' onClick={() => setIsError(!isError)}>
+        {isError ? 'Toggle without error' : 'Toggle Error'}
+      </button>
+      {isError ? <h1>Error...</h1> : <h1>No Errors :)</h1>}
+
+      {/* {!text && <h1>Render</h1>} */}
+    </>
   )
 }
