@@ -7,7 +7,8 @@ function App() {
   return (
     <div className='container'>
       <h1>Advanced React</h1>
-      <ShortCircuit />
+      <ToggleComponent />
+      {/* <ShortCircuit /> */}
       {/* <Returns /> */}
       {/* <Counter initialValue={0} />
       <Login name="Romario" />
@@ -258,8 +259,8 @@ const Returns = () => {
 const ShortCircuit = () => {
   const [text, setText] = useState('')
   const [isError, setIsError] = useState(false)
-  const firstValue = text || 'hello value'
-  const secondValue = text && 'second value'
+  // const firstValue = text || 'hello value'
+  // const secondValue = text && 'second value'
 
   return (
     <>
@@ -277,4 +278,39 @@ const ShortCircuit = () => {
       {/* {!text && <h1>Render</h1>} */}
     </>
   )
+}
+
+
+const ToggleComponent = () => {
+  const [show, setShow] = useState(false)
+  return (
+    <>
+      <button onClick={() => setShow(!show)}>
+        {show ? 'Hide Component' : 'Show Component'}
+      </button>
+      {show ? <Item /> : <strong>nothing to show here!</strong>}
+    </>
+  )
+
+}
+
+const Item = () => {
+  const [size, setSize] = useState(window.innerWidth)
+
+  const checkSize = () => {
+    setSize(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', checkSize)
+    return () => {
+      window.removeEventListener('resize', checkSize)
+    }
+  }, [])
+
+  return <div style={{ fontWeight: 'bold', color: "green" }}>
+    <h1>you clicked show component!</h1>
+    <h2>good job!</h2>
+    <h3>Window size: {size} px</h3>
+  </div>
 }
