@@ -6,10 +6,10 @@ import UseEffectFetchData from "./UseEffectFetchData";
 const Train = () => {
     return (
         <div className="useEffect">
-        <UseEffectBasis/>
+        {/* <UseEffectBasis/>
         <UseEffectCleanup/>
         <h3>-----------------------------------------</h3>
-        <UseEffectFetchData/>
+        <UseEffectFetchData/> */}
         </div>
     )
 }

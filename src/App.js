@@ -1,17 +1,20 @@
 import './index';
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
+import MultiReturn from './multipleReturns/MultipleReturns';
+const url = 'https://course-api.com/react-tours-project';
 
 function App() {
   return (
     <div className='container'>
       <h1>Advanced React</h1>
-      <Counter initialValue={0} />
+      <ShortCircuit />
+      {/* <Returns /> */}
+      {/* <Counter initialValue={0} />
       <Login name="Romario" />
       <Login name="Jane" />
       <Array />
       <Obj firstName="John" />
-      <NumberCounter />
+      <NumberCounter /> */}
     </div>
   );
 }
@@ -163,7 +166,7 @@ const NumberCounter = () => {
   const complexIncrease = () => {
     setTimeout(() => {
       setValue((prevValue) => {
-          return prevValue + 1
+        return prevValue + 1
       })
     }, 2000);
   }
@@ -201,4 +204,61 @@ const NumberCounter = () => {
 
 const ValidationError = ({ message }) => {
   return <p style={{ color: 'red', fontWeight: 'bold' }}>{message}</p>
+}
+
+const Returns = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [user, setUser] = useState([])
+
+  const fetchUsers = async () => {
+    setIsLoading(true)
+    try {
+      const users = await fetch(url)
+      if (users.status === 200) {
+        const jsonData = await users.json()
+        setIsLoading(false)
+        setUser(jsonData)
+      } else {
+        setIsLoading(false)
+        setIsError(true)
+        throw new Error('fetch request did not return 200')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchUsers()
+  }, [])
+
+  if (isLoading) {
+    return <div>
+      <h1>Loading...</h1>
+    </div>
+  }
+
+  if (isError) {
+    return <div>
+      <h1>Error...</h1>
+    </div>
+  }
+
+  return (
+    <div>
+      {user.map((users) => {
+        <div key={users.id} {...users}></div>
+        { console.log() }
+      })}
+    </div>
+  )
+}
+
+const ShortCircuit = () => {
+  return (
+    <div>
+      Hello
+    </div>
+  )
 }
