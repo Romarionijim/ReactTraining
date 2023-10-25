@@ -59,3 +59,15 @@ button {
 .useEffect {
   text-align: center;
 }
+
+.user-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr
+}
+
+@media (max-width: 700px) {
+  .user-container {
+    grid-template-columns: 1fr;
+    /* One column at a time for screens narrower than 768px */
+  }
+}
