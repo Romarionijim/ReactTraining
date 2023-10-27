@@ -7,7 +7,8 @@ function App() {
   return (
     <div className='container'>
       <h1>Advanced React</h1>
-      <FormTraining />
+      <SumNums />
+      {/* <FormTraining /> */}
       {/* <ControlledInputs /> */}
       {/* <Form /> */}
       {/* <ToggleComponent /> */}
@@ -533,3 +534,73 @@ const FormTraining = () => {
 
 }
 
+
+//-----------calculate and sum two numbers via form inputs
+
+
+const SumNums = () => {
+  const [number1, setNumber1] = useState(0);
+  const [number2, setNumber2] = useState(0);
+  const [result, setResult] = useState(0);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = parseFloat(e.target.value);
+    if (name === 'number1') {
+      setNumber1(value);
+    } else if (name === 'number2') {
+      setNumber2(value);
+    }
+  }
+
+  const handleReset = () => {
+    setNumber1(0);
+    setNumber2(0);
+    setResult(0);
+  }
+
+  const handleSum = () => {
+    const sum = number1 + number2;
+    setResult(sum);
+  }
+
+  return (
+    <main>
+      <form>
+        <label htmlFor='number1'>Number 1: </label>
+        <input
+          type='text'
+          name='number1'
+          id='number1'
+          placeholder='number 1'
+          onChange={handleChange}
+          value={number1}
+        />
+      </form>
+      <form>
+        <label htmlFor='number2'>Number 2: </label>
+        <input
+          type='text'
+          name='number2'
+          id='number2'
+          placeholder='number 2'
+          onChange={handleChange}
+          value={number2}
+        />
+      </form>
+      <form>
+        <label htmlFor='result'>Result: </label>
+        <input
+          type='text'
+          name='result'
+          id='result'
+          readOnly={true}
+          placeholder='result'
+          value={result}
+        />
+      </form>
+      <button type='button' onClick={handleSum}>Sum</button>
+      <button type='button' onClick={handleReset}>Reset</button>
+    </main>
+  );
+}
