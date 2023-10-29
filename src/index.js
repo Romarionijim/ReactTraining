@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Train from './Train'
+import GroceryApp from './grocery/GroceryApp';
+import TravisApp from './travis/TravisApp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-    <Train />
+    {/* <App />
+    <Train /> */}
+    {/* <GroceryApp/> */}
+    <TravisApp />
   </React.StrictMode>
 );
 
